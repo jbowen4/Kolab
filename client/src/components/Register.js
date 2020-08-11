@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../actions/alert';
 import { register } from '../actions/auth';
 
@@ -28,6 +28,10 @@ const Register = (props) => {
         }
     }
 
+    if (props.isAuthenticated) {
+        return <Redirect to="/dashboard" />;
+    }
+
     return (
         <Fragment>
             <h1>Signup</h1>
@@ -39,7 +43,7 @@ const Register = (props) => {
                     name="name"
                     onChange={e => onChange(e)}
                     value={name}
-                // required
+                    required
                 />
                 <input
                     type="email"
@@ -47,13 +51,13 @@ const Register = (props) => {
                     name="email"
                     onChange={e => onChange(e)}
                     value={email}
-                // required
+                    required
                 />
                 <input
                     type="password"
                     placeholder="Password"
                     name="password"
-                    // minLength="6"
+                    minLength="6"
                     onChange={e => onChange(e)}
                     value={password}
                 />
@@ -61,7 +65,7 @@ const Register = (props) => {
                     type="password"
                     placeholder="Confirm Password"
                     name="password2"
-                    // minLength="6"
+                    minLength="6"
                     onChange={e => onChange(e)}
                     value={password2}
                 />
@@ -77,9 +81,14 @@ const Register = (props) => {
 Register.propTypes = {
     setAlert: PropTypes.func.isRequired,
     register: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool,
 }
 
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
 export default connect(
-    null,
+    mapStateToProps,
     { setAlert, register }
 )(Register);

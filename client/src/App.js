@@ -3,6 +3,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import SignForm from './layouts/SignForm';
 import Welcome from './layouts/Welcome';
+import Navbar from './components/Navbar';
+import Dashboard from './layouts/Dashboard';
+import CreateProfile from './layouts/CreateProfile';
+import EditProfile from './layouts/EditProfile';
+import PrivateRoute from './components/PrivateRoute';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -23,9 +28,13 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
+        <Navbar />
         <Switch>
           <Route exact path="/" component={Welcome} />
           <Route exact path="/signin" component={SignForm} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
+          <PrivateRoute exact path="/create-profile" component={CreateProfile} />
+          <PrivateRoute exact path="/edit-profile" component={EditProfile} />
         </Switch>
       </Router>
     </Provider>

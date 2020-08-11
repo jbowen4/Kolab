@@ -54,7 +54,7 @@ router.post('/', [auth, [
         if (location) profileFields.location = location;
         if (bio) profileFields.bio = bio;
         if (skills) {
-            profileFields.skills = skills.split(',').map(skill => skill.trim());  // get array from comma-seperated string
+            profileFields.skills = skills.split(',').map(skill => ' ' + skill.trim());  // get array from comma-seperated string
         }
 
         // Build social object
