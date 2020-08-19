@@ -7,7 +7,7 @@ const Alert = ({ alerts }) => {     // destructure alerts from props (props.aler
         <React.Fragment>
             {alerts !== null && alerts.length > 0 &&  // if these 2 expressions are true...
                 alerts.map(alert => (
-                    <div key={alert.id} className={`alert .${alert.alertType}`}>
+                    <div key={alert.id} className={`alert alert-${alert.alertType}`}>
                         {alert.msg}
                     </div>
                 ))}

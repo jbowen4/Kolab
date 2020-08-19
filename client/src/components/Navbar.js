@@ -7,22 +7,21 @@ import { logout } from '../actions/auth';
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     const authLinks = (
         <ul>
-            <li>
-                <a onClick={logout} href="#!">Logout</a>
-            </li>
+            <li><Link to="/profiles">Profiles</Link></li>
+            <li><Link to="/dashboard">Dashboard</Link></li>
+            <li><a class="nav-button" onClick={logout} href="#!">Logout</a></li>
         </ul>
     );
 
     const guestLinks = (
-        <ul>
-            <li>Register</li>
-            <li>Login</li>
-        </ul>
+        <Link class="nav-button" to="/signin">Join</Link>
     );
 
     return (
-        <nav>
-            <h1>Kolab</h1>
+        <nav class="navbar">
+            <Link class="logo" to="/">
+                <i class="fas fa-paper-plane"></i><h1>Kolab</h1>
+            </Link>
             {!loading && (<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>)}
         </nav>
     )

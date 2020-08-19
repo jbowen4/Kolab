@@ -27,10 +27,9 @@ const Login = ({ login, isAuthenticated }) => {
     }
 
     return (
-        <Fragment>
-            <h1>Sign In</h1>
-            <p>Sign Into Your Account</p>
+        <div class="form-container sign-in-container">
             <form onSubmit={e => onSubmit(e)}>
+                <h1>Sign In</h1>
                 <input
                     type="email"
                     placeholder="Email Address"
@@ -47,12 +46,9 @@ const Login = ({ login, isAuthenticated }) => {
                     onChange={e => onChange(e)}
                     value={password}
                 />
-                <input type="submit" value="Login" />
+                <button type="submit" class="sign-button">Sign In</button>
             </form>
-            <p>
-                Don't have an account? <button>Sign Up</button>
-            </p>
-        </Fragment>
+        </div>
     )
 }
 

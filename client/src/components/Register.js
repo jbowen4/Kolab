@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { setAlert } from '../actions/alert';
@@ -21,11 +21,8 @@ const Register = (props) => {
     const onSubmit = async e => {
         e.preventDefault();
 
-        if (password !== password2) {
-            props.setAlert('Passwords do not match', 'danger');
-        } else {
-            props.register({ name, email, password });
-        }
+        props.register({ name, email, password });
+
     }
 
     if (props.isAuthenticated) {
@@ -33,10 +30,9 @@ const Register = (props) => {
     }
 
     return (
-        <Fragment>
-            <h1>Signup</h1>
-            <p>Create your account</p>
+        <div class="form-container sign-up-container">
             <form onSubmit={e => onSubmit(e)}>
+                <h1>Create Account</h1>
                 <input
                     type="text"
                     placeholder="Name"
@@ -61,20 +57,9 @@ const Register = (props) => {
                     onChange={e => onChange(e)}
                     value={password}
                 />
-                <input
-                    type="password"
-                    placeholder="Confirm Password"
-                    name="password2"
-                    minLength="6"
-                    onChange={e => onChange(e)}
-                    value={password2}
-                />
-                <input type="submit" value="Register" />
+                <button type="submit" class="sign-button">Sign Up</button>
             </form>
-            <p>
-                Already have an account? <button>Sign In</button>
-            </p>
-        </Fragment>
+        </div>
     )
 }
 

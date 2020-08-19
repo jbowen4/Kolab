@@ -30,7 +30,7 @@ const EditProfile = ({
             linkedin: loading || !profile.linkedin ? '' : profile.social.linkedin,
             instagram: loading || !profile.social ? '' : profile.social.instagram
         });
-    }, [loading]);
+    }, [loading, getCurrentProfile]);
 
     const {
         location,
