@@ -1,19 +1,59 @@
-import React from 'react'
+import React, { Fragment, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import Spinner from '../components/Spinner';
+import ProfileTop from '../components/ProfileTop';
+import ProfileAbout from '../components/ProfileAbout';
 import { getProfileById } from '../actions/profile';
 
-const Profile = props => {
-    return (
-        <div>
+// match gets the id from the url
+const Profile = ({
+    getProfileById,
+    profile: { profile, loading },
+    auth,
+    match
+}) => {
 
-        </div>
+    useEffect(() => {
+        getProfileById(match.params.id);
+    }, [getProfileById, match.params.id]);
+
+    return (
+        <Fragment>
+            {profile === null || loading ? (
+                <Spinner />
+            ) : (<Fragment>
+                <Link to='/profiles'>
+                    Back to profiles
+                </Link>
+                {auth.isAuthenticated &&
+                    auth.loading === false &&
+                    auth.user._id === profile.user._id && (
+                        <Link to='/edit-profile'>
+                            Edit
+                        </Link>
+                    )
+                }
+                <div>
+                    <ProfileTop profile={profile} />
+                    <ProfileAbout profile={profile} />
+                </div>
+            </Fragment>
+                )}
+        </Fragment>
     )
 }
 
 Profile.propTypes = {
-
+    getProfileById: PropTypes.func.isRequired,
+    profile: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
 }
 
-export default Profile
+const mapStateToProps = state => ({
+    profile: state.profile,
+    auth: state.auth
+})
+
+export default connect(mapStateToProps, { getProfileById })(Profile);

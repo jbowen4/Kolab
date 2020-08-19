@@ -9,6 +9,7 @@ import CreateProfile from './layouts/CreateProfile';
 import EditProfile from './layouts/EditProfile';
 import PrivateRoute from './components/PrivateRoute';
 import Profiles from './layouts/Profiles';
+import Profile from './layouts/Profile';
 
 // Redux
 import { Provider } from 'react-redux';
@@ -34,6 +35,7 @@ function App() {
           <Route exact path="/" component={Welcome} />
           <Route exact path="/signin" component={SignForm} />
           <Route exact path="/profiles" component={Profiles} />
+          <Route exact path="/profile/:id" component={Profile} />
           <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/create-profile" component={CreateProfile} />
           <PrivateRoute exact path="/edit-profile" component={EditProfile} />
